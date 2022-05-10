@@ -17,19 +17,29 @@
     <thead>
         <tr>
             <th>Name</th>
+            <th>Dates</th>
+            <th>techhub address</th>
         </tr>
     </thead>
-    <tr th:each="event : ${events}">
-        <td th:text="${event}">Default Event</td>
-    </tr>
+
+<!--USING TH:BLOCK-->
+    <th:block th:each="event : ${events.keySet()}">
+        <tr>
+            <td th:text="${event}">Default Event</td>
+            <td th:text="${events.get(event)}">Default Dates</td>
+            <td th:replace="fragments :: techHub"></td>
+        </tr>
+    </th:block>
+
+<!--    NOT USING th:block (both work, this is less lines of code though, don't know why you would -->
+<!--    not put the th:each in the <tr> tag-->
+
+<!--    <tr th:each="event : ${events.keySet()}">-->
+<!--        <td th:text="${event}">Default Event</td>-->
+<!--        <td th:text="${events.get(event)}">Default Dates</td>-->
+<!--    </tr>-->
+
 </table>
-
-
-<!--    <ul>-->
-<!--        <th:block th:each="event : ${events}">-->
-<!--            <li th:text="${event}">Default Event</li>-->
-<!--        </th:block>-->
-<!--    </ul>-->
 
 </body>
 
