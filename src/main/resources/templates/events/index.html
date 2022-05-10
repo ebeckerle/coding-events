@@ -16,6 +16,7 @@
 <table class="table">
     <thead>
         <tr>
+            <th>ID</th>
             <th>Name</th>
             <th>Dates</th>
             <th>techhub address</th>
@@ -23,10 +24,11 @@
     </thead>
 
 <!--USING TH:BLOCK-->
-    <th:block th:each="event : ${events.keySet()}">
+    <th:block th:each="event : ${events}">
         <tr>
-            <td th:text="${event}">Default Event</td>
-            <td th:text="${events.get(event)}">Default Dates</td>
+            <td th:text="${event.id}">Default ID</td>
+            <td th:text="${event.name}">Default Event</td>
+            <td th:text="${event.description}">Default Dates</td>
             <td th:replace="fragments :: techHub"></td>
         </tr>
     </th:block>
