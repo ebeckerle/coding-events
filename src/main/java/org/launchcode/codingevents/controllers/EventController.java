@@ -26,7 +26,8 @@ public class EventController {
 
     //lives at /events/create
     @GetMapping("create")
-    public String renderCreateEventForm(){
+    public String displayCreateEventForm(Model model){
+        model.addAttribute("title","Create Event");
         return "events/create";
     }
 

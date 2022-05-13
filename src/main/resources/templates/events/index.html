@@ -8,13 +8,12 @@
 </nav>
 
     <p th:unless="${events} and ${events.size()}">No Events!</p>
-<table class="table">
+<table class="table table-striped">
     <thead>
         <tr>
             <th>ID</th>
             <th>Name</th>
-            <th>Dates</th>
-            <th>techhub address</th>
+            <th>Description</th>
         </tr>
     </thead>
 
@@ -23,8 +22,7 @@
         <tr>
             <td th:text="${event.id}">Default ID</td>
             <td th:text="${event.name}">Default Event</td>
-            <td th:text="${event.description}">Default Dates</td>
-            <td th:replace="fragments :: techHub"></td>
+            <td th:text="${event.description}">Default Description</td>
         </tr>
     </th:block>
 
