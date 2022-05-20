@@ -1,8 +1,7 @@
 package org.launchcode.codingevents.models;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
+import java.util.Date;
 import java.util.Objects;
 
 
@@ -22,11 +21,28 @@ public class Event {
     @Email(message="Invalid email. Try again.")
     private String contactEmail;
 
+    @NotBlank(message="A Location is Required")
+    private String location;
 
-    public Event(String name, String description, String contactEmail){
+    @Future(message="Cannot add an event that is already over. Please enter a future date.")
+    private Date dates;
+
+    @AssertTrue(message="sorry, for the purposes of this exercise, attendees must Register, so we can practice using more validation annotations")
+    private Boolean registration;
+
+    @Positive(message="Number of Attendees must be a positive number")
+    private Integer attendees;
+
+
+
+    public Event(String name, String description, String contactEmail, String location, Date dates, Boolean registration, Integer attendees){
         this.name = name;
         this.description = description;
         this.contactEmail = contactEmail;
+        this.location = location;
+        this.dates = dates;
+        this.registration = registration;
+        this.attendees = attendees;
         this.id = nextId;
         nextId++;
     }
@@ -59,6 +75,38 @@ public class Event {
 
     public void setContactEmail(String contactEmail) {
         this.contactEmail = contactEmail;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public Date getDates() {
+        return dates;
+    }
+
+    public void setDates(Date dates) {
+        this.dates = dates;
+    }
+
+    public Boolean getRegistration() {
+        return registration;
+    }
+
+    public void setRegistration(Boolean registration) {
+        this.registration = registration;
+    }
+
+    public Integer getAttendees() {
+        return attendees;
+    }
+
+    public void setAttendees(Integer attendees) {
+        this.attendees = attendees;
     }
 
     @Override
