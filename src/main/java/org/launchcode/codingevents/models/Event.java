@@ -47,7 +47,10 @@ public class Event {
         nextId++;
     }
 
-    public Event(){}
+    public Event(){
+        this.id = nextId;
+        nextId++;
+    }
 
     public int getId() {
         return id;
