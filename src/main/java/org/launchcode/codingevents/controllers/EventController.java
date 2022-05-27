@@ -2,6 +2,7 @@ package org.launchcode.codingevents.controllers;
 
 import org.launchcode.codingevents.data.EventData;
 import org.launchcode.codingevents.models.Event;
+import org.launchcode.codingevents.models.EventType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -16,8 +17,7 @@ import java.util.List;
 @RequestMapping("events")
 public class EventController {
 
-//    DON'T NEED - now that we have our EventData abstraction
-//    private static List<Event> events = new ArrayList<>();
+
 
     @GetMapping
     public String displayAllEvents(Model model){
@@ -31,21 +31,15 @@ public class EventController {
     public String displayCreateEventForm(Model model){
         model.addAttribute("title","Create Event");
         model.addAttribute(new Event());
+        model.addAttribute("types", EventType.values());
         return "events/create";
     }
 
-//    @PostMapping("create")
-//    public String createEvent(@RequestParam String eventName, @RequestParam String eventDescription){
-//        EventData.add(new Event(eventName, eventDescription));
-//        return "redirect:/events";
-//    }
 
-    //model binding version of createEvent method
     @PostMapping("create")
-    public String createEvent(@ModelAttribute @Valid Event newEvent, Errors errors, Model model){
+    public String processCreateEventForm(@ModelAttribute @Valid Event newEvent, Errors errors, Model model){
         if (errors.hasErrors()){
             model.addAttribute("title","Create Event");
-//            model.addAttribute("errorMsg", "Bad Data!");
             return "events/create";
         }
         EventData.add(newEvent);

@@ -33,9 +33,12 @@ public class Event {
     @Positive(message="Number of Attendees must be a positive number")
     private Integer attendees;
 
+    private EventType type;
 
 
-    public Event(String name, String description, String contactEmail, String location, Date dates, Boolean registration, Integer attendees){
+
+    public Event(String name, String description, String contactEmail, String location, Date dates, Boolean registration, Integer attendees, EventType type){
+        this();
         this.name = name;
         this.description = description;
         this.contactEmail = contactEmail;
@@ -43,8 +46,7 @@ public class Event {
         this.dates = dates;
         this.registration = registration;
         this.attendees = attendees;
-        this.id = nextId;
-        nextId++;
+        this.type = type;
     }
 
     public Event(){
@@ -110,6 +112,10 @@ public class Event {
 
     public void setAttendees(Integer attendees) {
         this.attendees = attendees;
+    }
+
+    public EventType getType() {
+        return type;
     }
 
     @Override
