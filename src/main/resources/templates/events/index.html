@@ -1,58 +1,28 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
-<head th:replace="fragments :: head">
-</head>
+<head th:replace="fragments :: head"></head>
 <body class="container">
 
-<nav th:replace="fragments :: navigation">
-</nav>
+<header th:replace="fragments :: header"></header>
 
-    <p th:unless="${events} and ${events.size()}">No Events!</p>
 <table class="table table-striped">
     <thead>
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Contact</th>
-            <th>Location</th>
-            <th>Dates</th>
-            <th>Registration Required?</th>
-            <th>Number of Attendees</th>
-            <th>Type</th>
-            <th></th>
-        </tr>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Contact Email</th>
+        <th>Type</th>
+    </tr>
     </thead>
-
-<!--USING TH:BLOCK-->
-<!--    <th:block th:each="event : ${events}">-->
-<!--        <tr>-->
-<!--            <td th:text="${event.id}">Default ID</td>-->
-<!--            <td th:text="${event.name}">Default Event</td>-->
-<!--            <td th:text="${event.description}">Default Description</td>-->
-<!--            <td th:text="${event.contactEmail}">Default Contact</td>-->
-<!--            <td th:text="${event.location}">Default Location</td>-->
-<!--            <td th:text="${event.dates}">Default Dates</td>-->
-<!--            <td th:text="${event.registration}">Default Registration</td>-->
-<!--            <td th:text="${event.attendees}">Default Attendees</td>-->
-<!--            <td th:text="${event.type.displayName}">Default Type</td>-->
-<!--            <td><button><a th:href="@{/events/edit/{id}(id=${event.id})}">edit</a></button></td>-->
-<!--        </tr>-->
-<!--    </th:block>-->
-
-<!--    NOT USING th:block (both work, this is less lines of code though, don't know why you would -->
-<!--    not put the th:each in the <tr> tag-->
-
     <tr th:each="event : ${events}">
-        <td th:text="${event.id}">Default Event</td>
-        <td th:text="${event.name}">Default Event</td>
+        <td th:text="${event.id}"></td>
+        <td th:text="${event.name}"></td>
         <td th:text="${event.description}"></td>
         <td th:text="${event.contactEmail}"></td>
         <td th:text="${event.type.displayName}"></td>
     </tr>
-
 </table>
 
 </body>
-
 </html>

@@ -1,62 +1,42 @@
 package org.launchcode.codingevents.models;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+//import javax.persistence.Entity;
+//import javax.persistence.GeneratedValue;
+//import javax.persistence.Id;
 import javax.validation.constraints.*;
 import java.util.Date;
 import java.util.Objects;
 
-@Entity
 public class Event {
 
-    @Id
-    @GeneratedValue
     private int id;
+    private static int nextId = 1;
 
-    @NotBlank(message="Event Name is Required")
-    @Size(min= 3, max = 50, message="Name must be between 3 and 50 characters")
+    @NotBlank(message = "Name is required")
+    @Size(min = 3, max = 50, message = "Name must be between 3 and 50 characters")
     private String name;
 
-    @Size(max=500, message="Description must be under 500 characters.")
+    @Size(max = 500, message = "Description too long!")
     private String description;
 
-    @NotBlank(message="Email Address is Required")
-    @Email(message="Invalid email. Try again.")
+    @NotBlank(message = "Email is required")
+    @Email(message = "Invalid email. Try again.")
     private String contactEmail;
-
-    @NotBlank(message="A Location is Required")
-    private String location;
-
-    @Future(message="Cannot add an event that is already over. Please enter a future date.")
-    private Date dates;
-
-    @AssertTrue(message="sorry, for the purposes of this exercise, attendees must Register, so we can practice using more validation annotations")
-    private Boolean registration;
-
-    @Positive(message="Number of Attendees must be a positive number")
-    private Integer attendees;
 
     private EventType type;
 
-
-
-    public Event(String name, String description, String contactEmail, String location, Date dates, Boolean registration, Integer attendees, EventType type){
+    public Event(String name, String description, String contactEmail, EventType type) {
+        this();
         this.name = name;
         this.description = description;
         this.contactEmail = contactEmail;
-        this.location = location;
-        this.dates = dates;
-        this.registration = registration;
-        this.attendees = attendees;
         this.type = type;
     }
 
-    public Event(){ }
-
-    public int getId() {
-        return id;
+    public Event() {
+        this.id = nextId;
+        nextId++;
     }
 
     public String getName() {
@@ -83,40 +63,16 @@ public class Event {
         this.contactEmail = contactEmail;
     }
 
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public Date getDates() {
-        return dates;
-    }
-
-    public void setDates(Date dates) {
-        this.dates = dates;
-    }
-
-    public Boolean getRegistration() {
-        return registration;
-    }
-
-    public void setRegistration(Boolean registration) {
-        this.registration = registration;
-    }
-
-    public Integer getAttendees() {
-        return attendees;
-    }
-
-    public void setAttendees(Integer attendees) {
-        this.attendees = attendees;
-    }
-
     public EventType getType() {
         return type;
+    }
+
+    public void setType(EventType type) {
+        this.type = type;
+    }
+
+    public int getId() {
+        return id;
     }
 
     @Override

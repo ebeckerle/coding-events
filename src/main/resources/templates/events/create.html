@@ -1,72 +1,43 @@
 <!DOCTYPE html>
-<html lang="en"  xmlns:th="http://www.thymeleaf.org/">
-<head th:replace="fragments :: head">
-</head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
 <body class="container">
 
-<nav th:replace="fragments :: navigation">
-</nav>
+<header th:replace="fragments :: header"></header>
 
-<!--<p th:text="${errorMsg}" style="color: red;"></p>-->
-    <form method="post">
-        <div class="form-group">
-            <label>Event:
-                <input th:field="${event.name}" class="form-control">
-            </label>
-            <p class="error" th:errors="${event.name}"></p>
-        </div>
-        <div class="form-group">
-            <label>Description:
-                <input th:field="${event.description}" class="form-control">
-            </label>
-            <p class="error" th:errors="${event.description}"></p>
-        </div>
-        <div class="form-group">
-            <label>Contact:
-                <input th:field="${event.contactEmail}" class="form-control">
-            </label>
-            <p class="error" th:errors="${event.contactEmail}"></p>
-        </div>
-        <div class="form-group">
-            <label>Location:
-                <input th:field="${event.location}" class="form-control">
-            </label>
-            <p class="error" th:errors="${event.location}"></p>
-        </div>
-        <div class="form-group">
-            <label>Dates:
-                <input th:field="${event.dates}" class="form-control">
-            </label>
-            <p class="error" th:errors="${event.dates}"></p>
-        </div>
-        <div class="form-group">
-            <label>Registration Required?:</label><br>
-<!--                <input th:field="${event.registration}" class="form-control">-->
-                <input type="radio" id="yes" value="true" th:field="${event.registration}">
-                <label for="yes">Required</label>
-                <input type="radio" id="no" value="false" th:field="${event.registration}">
-                <label for="no">Not Required</label>
-
-            <p class="error" th:errors="${event.registration}"></p>
-        </div>
-        <div class="form-group">
-            <label>Number of Attendees:
-                <input th:field="${event.attendees}" class="form-control">
-            </label>
-            <p class="error" th:errors="${event.attendees}"></p>
-        </div>
-        <div class="form-group">
-            <label>Type:
-                <select th:field="${event.type}">
-                    <option th:each="type : ${types}" th:value="${type}" th:text="${type.displayName}"></option>
-                </select>
-            </label>
-        </div>
-        <div class="form-group">
-            <input type="submit" value="Create Event" class="btn btn-success">
-        </div>
-
-    </form>
+<form method="post">
+    <div class="form-group">
+        <label>Name
+            <input th:field="${event.name}" class="form-control">
+        </label>
+        <p class="error" th:errors="${event.name}"></p>
+    </div>
+    <div class="form-group">
+        <label>Description
+            <input th:field="${event.description}" class="form-control">
+        </label>
+        <p class="error" th:errors="${event.description}"></p>
+    </div>
+    <div class="form-group">
+        <label>Contact Email
+            <input th:field="${event.contactEmail}" class="form-control">
+        </label>
+        <p class="error" th:errors="${event.contactEmail}"></p>
+    </div>
+    <div class="form-group">
+        <label>Type
+            <select th:field="${event.type}">
+                <option th:each="type : ${types}"
+                        th:value="${type}"
+                        th:text="${type.displayName}"
+                ></option>
+            </select>
+        </label>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-success">
+    </div>
+</form>
 
 </body>
 </html>
