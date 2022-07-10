@@ -5,7 +5,6 @@ import org.launchcode.codingevents.data.EventRepository;
 import org.launchcode.codingevents.data.TagRepository;
 import org.launchcode.codingevents.models.Event;
 import org.launchcode.codingevents.models.EventCategory;
-import org.launchcode.codingevents.models.EventType;
 import org.launchcode.codingevents.models.Tag;
 import org.launchcode.codingevents.models.dto.EventTagDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +14,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -32,7 +32,7 @@ public class EventController {
     private TagRepository tagRepository;
 
     @GetMapping
-    public String displayAllEvents(@RequestParam(required = false) Integer categoryId, Model model){
+    public String displayAllEvents(@RequestParam(required = false) Integer categoryId, @RequestParam(required = false) Integer tagId, Model model){
         if(categoryId == null){
             model.addAttribute("title", "All Events");
             model.addAttribute("events",eventRepository.findAll());
@@ -55,16 +55,21 @@ public class EventController {
         model.addAttribute("title","Create Event");
         model.addAttribute(new Event());
         model.addAttribute("categories", eventCategoryRepository.findAll());
+        model.addAttribute("tags", tagRepository.findAll());
         return "events/create";
     }
 
 
     @PostMapping("create")
-    public String processCreateEventForm(@ModelAttribute @Valid Event newEvent, Errors errors, Model model){
+    public String processCreateEventForm(@ModelAttribute @Valid Event newEvent, Errors errors, @RequestParam(required = false) List<Tag> tags, Model model){
         if (errors.hasErrors()){
             model.addAttribute("title","Create Event");
             return "events/create";
         }
+//        for (Tag tag:
+//             tags) {
+//            newEvent.addTag(tag);
+//        }
         eventRepository.save(newEvent);
         return "redirect:";
     }
@@ -111,8 +116,6 @@ public class EventController {
         EventTagDTO eventTag = new EventTagDTO();
         eventTag.setEvent(event);
         model.addAttribute("eventTag", eventTag);
-//        model.addAttribute("event", event);
-//        model.addAttribute(new EventTagDTO());
         return "events/add-tag.html";
     }
 
